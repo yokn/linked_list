@@ -9,7 +9,9 @@ class LinkedList
 
   def append(value, next_node = nil)
     if @head
-
+      @new_head = Node.new(value, next_node)
+      p @head.next_node = @new_head
+      # p @head = @newhead
     else
       p @head = Node.new(value, next_node)
     end
@@ -33,9 +35,17 @@ class LinkedList
 
   def find(value); end
 
-  def to_s; end
+  def to_s
+    ObjectSpace.each_object(Node) do |node|
+      print node.value
+      print '->'
+    end
+  end
 end
 
 my_linked_list = LinkedList.new
 my_linked_list.append(5)
 my_linked_list.append(3)
+my_linked_list.append(7)
+p my_linked_list
+puts my_linked_list
