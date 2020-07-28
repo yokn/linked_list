@@ -2,6 +2,8 @@
 
 require_relative 'node'
 
+# TODO: Find and fix special cases for all methods such as certain things not existing or changing head/tail
+
 class LinkedList
   def initialize
     @head = nil
@@ -106,8 +108,16 @@ class LinkedList
       end
       @pointer = @pointer.next_node
     end
-    # @head = @newest_node if index == 0
-    # @tail = @newest_node if @newest_node.next_node.nil?
+  end
+
+  def remove_at(index)
+    @index = -1
+    @pointer = @head
+    until @pointer.nil?
+      @index += 1
+      @pointer.next_node = @pointer.next_node.next_node if @index == index - 1
+      @pointer = @pointer.next_node
+    end
   end
 end
 my_linked_list = LinkedList.new
@@ -122,6 +132,7 @@ my_linked_list.prepend(1)
 my_linked_list.pop
 
 my_linked_list.insert_at(8, 2)
+my_linked_list.remove_at(1)
 
 puts "Size is: #{my_linked_list.size} nodes"
 
