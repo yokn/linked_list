@@ -25,7 +25,11 @@ class LinkedList
     @tail = newest_node
   end
 
-  def prepend(value); end
+  def prepend(value)
+    newest_node = Node.new(value)
+    newest_node.next_node = @head
+    @head = newest_node
+  end
 
   def size; end
 
@@ -33,20 +37,22 @@ class LinkedList
 
   def at(index); end
 
-  def pop; end
+  def pop
+    # pointer = pointer.next_node until pointer.next_node.next_node.nil?
+  end
 
   def contains?(value); end
 
   def find(value); end
 
   def to_s
-    print 'nil'
-    print ' <- '
-    ObjectSpace.each_object(Node) do |node|
-      print node.value
-      print ' <- '
+    @temp = @head
+    until @temp.nil?
+      print @temp.value
+      print ' -> '
+      @temp = @temp.next_node
     end
-    # print '<-'
+    print 'nil '
   end
 end
 
@@ -55,7 +61,8 @@ my_linked_list.append(5)
 my_linked_list.append(3)
 my_linked_list.append(7)
 my_linked_list.append(4)
+my_linked_list.prepend(1)
 p my_linked_list
 puts my_linked_list
-p "Head is: #{my_linked_list.head.value}"
-p "Tail is: #{my_linked_list.tail.value}"
+p "Head is: #{my_linked_list.head.value} at #{my_linked_list.head}"
+p "Tail is: #{my_linked_list.tail.value} at #{my_linked_list.tail}"
