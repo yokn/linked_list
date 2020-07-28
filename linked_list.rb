@@ -58,7 +58,10 @@ class LinkedList
   end
 
   def pop
-    # pointer = pointer.next_node until pointer.next_node.next_node.nil?
+    @pointer = @head
+    @pointer = @pointer.next_node until @pointer.next_node.next_node.nil?
+    @pointer.next_node = nil
+    @tail = @pointer
   end
 
   def contains?(value)
@@ -102,6 +105,8 @@ my_linked_list.append(7)
 my_linked_list.prepend(9)
 my_linked_list.append(4)
 my_linked_list.prepend(1)
+
+my_linked_list.pop
 
 puts "Size is: #{my_linked_list.size} nodes"
 
