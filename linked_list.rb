@@ -1,31 +1,30 @@
 # frozen_string_literal: true
 
 require_relative 'node'
+require 'pry'
 
 class LinkedList
   def initialize
     @head = nil
   end
 
-  def append(value, next_node = nil)
-    if @head
-      @new_head = Node.new(value, next_node)
-      p @head.next_node = @new_head
-      # p @head = @newhead
-    else
-      p @head = Node.new(value, next_node)
-    end
-    # p abc.value(value)
-    # p abc.next_node(nil)
+  def append(value)
+    p newest_node = Node.new(value)
+
+    p @head = newest_node if @head.nil?
+
+    pointer = @head
+
+    # binding.pry
+    pointer = pointer.next_node until pointer.next_node.nil?
+    pointer.next_node = newest_node
   end
 
   def prepend(value); end
 
   def size; end
 
-  def head; end
-
-  def tail; end
+  attr_reader :head, :tail
 
   def at(index); end
 
@@ -38,8 +37,10 @@ class LinkedList
   def to_s
     ObjectSpace.each_object(Node) do |node|
       print node.value
-      print '->'
+      print '<-'
     end
+    # print '<-'
+    # print 'nil'
   end
 end
 
@@ -47,5 +48,7 @@ my_linked_list = LinkedList.new
 my_linked_list.append(5)
 my_linked_list.append(3)
 my_linked_list.append(7)
-p my_linked_list
+my_linked_list.append(4)
+# p my_linked_list
 puts my_linked_list
+p "Head is: #{my_linked_list.head.value}"
