@@ -51,7 +51,17 @@ class LinkedList
     false
   end
 
-  def find(value); end
+  def find(value)
+    @index = 0
+    @pointer = @head
+    until @pointer.nil?
+      return @index if @pointer.value == value
+
+      @pointer = @pointer.next_node
+      @index += 1
+    end
+    false
+  end
 
   def to_s
     @pointer = @head
@@ -65,6 +75,7 @@ class LinkedList
 end
 
 my_linked_list = LinkedList.new
+
 my_linked_list.append(5)
 my_linked_list.append(3)
 my_linked_list.append(7)
@@ -74,6 +85,8 @@ my_linked_list.prepend(1)
 
 p my_linked_list.contains?(5)
 p my_linked_list.contains?(111)
+p my_linked_list.find(5)
+p my_linked_list.find(111)
 
 p my_linked_list
 puts my_linked_list
