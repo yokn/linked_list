@@ -10,25 +10,25 @@ class LinkedList
   end
 
   def append(value)
-    newest_node = Node.new(value)
+    @newest_node = Node.new(value)
 
     if @head.nil?
-      @head = newest_node
+      @head = @newest_node
       return
     end
 
-    pointer = @head
+    @pointer = @head
 
     # binding.pry
-    pointer = pointer.next_node until pointer.next_node.nil?
-    pointer.next_node = newest_node
-    @tail = newest_node
+    @pointer = @pointer.next_node until @pointer.next_node.nil?
+    @pointer.next_node = @newest_node
+    @tail = @newest_node
   end
 
   def prepend(value)
-    newest_node = Node.new(value)
-    newest_node.next_node = @head
-    @head = newest_node
+    @newest_node = Node.new(value)
+    @newest_node.next_node = @head
+    @head = @newest_node
   end
 
   def size; end
@@ -43,14 +43,18 @@ class LinkedList
 
   def contains?(value); end
 
-  def find(value); end
-
-  def to_s
+  def find(_value)
     @temp = @head
     until @temp.nil?
-      print @temp.value
+    end
+  end
+
+  def to_s
+    @pointer = @head
+    until @pointer.nil?
+      print @pointer.value
       print ' -> '
-      @temp = @temp.next_node
+      @pointer = @pointer.next_node
     end
     print 'nil '
   end
@@ -62,6 +66,7 @@ my_linked_list.append(3)
 my_linked_list.append(7)
 my_linked_list.append(4)
 my_linked_list.prepend(1)
+my_linked_list.prepend(9)
 p my_linked_list
 puts my_linked_list
 p "Head is: #{my_linked_list.head.value} at #{my_linked_list.head}"
