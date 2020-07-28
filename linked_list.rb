@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'node'
-require 'pry'
 
 class LinkedList
   def initialize
@@ -19,7 +18,6 @@ class LinkedList
 
     @pointer = @head
 
-    # binding.pry
     @pointer = @pointer.next_node until @pointer.next_node.nil?
     @pointer.next_node = @newest_node
     @tail = @newest_node
@@ -95,8 +93,23 @@ class LinkedList
     end
     print 'nil '
   end
-end
 
+  def insert_at(value, index)
+    @index = -1
+    @pointer = @head
+    until @pointer.nil?
+      @index += 1
+      if @index == index
+        @newest_node = Node.new(value)
+        @newest_node.next_node = @pointer.next_node
+        @pointer.next_node = @newest_node
+      end
+      @pointer = @pointer.next_node
+    end
+    # @head = @newest_node if index == 0
+    # @tail = @newest_node if @newest_node.next_node.nil?
+  end
+end
 my_linked_list = LinkedList.new
 
 my_linked_list.append(5)
@@ -107,6 +120,8 @@ my_linked_list.append(4)
 my_linked_list.prepend(1)
 
 my_linked_list.pop
+
+my_linked_list.insert_at(8, 2)
 
 puts "Size is: #{my_linked_list.size} nodes"
 
