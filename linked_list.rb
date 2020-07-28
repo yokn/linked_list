@@ -44,7 +44,18 @@ class LinkedList
 
   attr_reader :head, :tail
 
-  def at(index); end
+  def at(index)
+    @index = -1
+    @pointer = @head
+    until @pointer.nil?
+      @index += 1
+      return @pointer.value if @index == index
+
+      @pointer = @pointer.next_node
+
+    end
+    'NOT FOUND'
+  end
 
   def pop
     # pointer = pointer.next_node until pointer.next_node.next_node.nil?
@@ -68,7 +79,6 @@ class LinkedList
       return @index if @pointer.value == value
 
       @pointer = @pointer.next_node
-
     end
     false
   end
@@ -94,6 +104,9 @@ my_linked_list.append(4)
 my_linked_list.prepend(1)
 
 puts "Size is: #{my_linked_list.size} nodes"
+
+puts "At index 4 there is: #{my_linked_list.at(4)}"
+puts "At index 99 there is: #{my_linked_list.at(99)}"
 
 p my_linked_list.contains?(5)
 p my_linked_list.contains?(111)

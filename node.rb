@@ -6,12 +6,4 @@ class Node
     @value = value
     @next_node = next_node
   end
-
-  # def value(value)
-  #   @value = value
-  # end
-
-  # def next_node(next_node)
-  #   @next_node = next_node
-  # end
 end
