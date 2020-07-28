@@ -11,7 +11,10 @@ class LinkedList
   def append(value)
     p newest_node = Node.new(value)
 
-    p @head = newest_node if @head.nil?
+    if @head.nil?
+      p @head = newest_node
+      return
+    end
 
     pointer = @head
 
