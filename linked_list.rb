@@ -31,7 +31,16 @@ class LinkedList
     @head = @newest_node
   end
 
-  def size; end
+  def size
+    @size = 0
+    @pointer = @head
+    until @pointer.nil?
+      @size += 1
+      @pointer = @pointer.next_node
+
+    end
+    @size
+  end
 
   attr_reader :head, :tail
 
@@ -52,13 +61,14 @@ class LinkedList
   end
 
   def find(value)
-    @index = 0
+    @index = -1
     @pointer = @head
     until @pointer.nil?
+      @index += 1
       return @index if @pointer.value == value
 
       @pointer = @pointer.next_node
-      @index += 1
+
     end
     false
   end
@@ -82,6 +92,8 @@ my_linked_list.append(7)
 my_linked_list.prepend(9)
 my_linked_list.append(4)
 my_linked_list.prepend(1)
+
+puts "Size is: #{my_linked_list.size} nodes"
 
 p my_linked_list.contains?(5)
 p my_linked_list.contains?(111)
