@@ -6,13 +6,14 @@ require 'pry'
 class LinkedList
   def initialize
     @head = nil
+    @tail = nil
   end
 
   def append(value)
-    p newest_node = Node.new(value)
+    newest_node = Node.new(value)
 
     if @head.nil?
-      p @head = newest_node
+      @head = newest_node
       return
     end
 
@@ -21,6 +22,7 @@ class LinkedList
     # binding.pry
     pointer = pointer.next_node until pointer.next_node.nil?
     pointer.next_node = newest_node
+    @tail = newest_node
   end
 
   def prepend(value); end
@@ -38,12 +40,13 @@ class LinkedList
   def find(value); end
 
   def to_s
+    print 'nil'
+    print ' <- '
     ObjectSpace.each_object(Node) do |node|
       print node.value
-      print '<-'
+      print ' <- '
     end
     # print '<-'
-    # print 'nil'
   end
 end
 
@@ -52,6 +55,7 @@ my_linked_list.append(5)
 my_linked_list.append(3)
 my_linked_list.append(7)
 my_linked_list.append(4)
-# p my_linked_list
+p my_linked_list
 puts my_linked_list
 p "Head is: #{my_linked_list.head.value}"
+p "Tail is: #{my_linked_list.tail.value}"
